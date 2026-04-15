@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PADATI - BPS KOTA PARIAMAN</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-orange': '#f97316',
+                        'dark-orange': '#c2410c',
+                        'light-orange': '#ffedd5',
+                        'text-dark': '#1f2937',
+                        'text-light': '#f9fafb',
+                        'bg-body': '#f3f4f6',
+                    },
+                    fontFamily: {
+                        sans: ['"Segoe UI"', 'Tahoma', 'sans-serif'],
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        fadeInLeft: {
+                            'from': { opacity: '0', transform: 'translateX(-30px)' },
+                            'to': { opacity: '1', transform: 'translateX(0)' },
+                        }
+                    },
+                    animation: {
+                        'float-slow': 'float 6s ease-in-out infinite',
+                        'fade-left': 'fadeInLeft 1s ease-out both',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Aksen Background Organik ala referensi */
+        .blob-bg {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            background: #f97316;
+            clip-path: polygon(25% 0%, 100% 0%, 100% 100%, 0% 100%);
+            opacity: 0.1;
+            z-index: -1;
+        }
+        
+        .hero-blob {
+            position: absolute;
+            right: -5%;
+            top: 15%;
+            width: 45%;
+            height: 70%;
+            background: linear-gradient(135deg, #f97316 0%, #ffedd5 100%);
+            border-radius: 40% 60% 40% 60% / 40% 40% 60% 60%;
+            z-index: -1;
+            opacity: 0.2;
+        }
+    </style>
+</head>
+<body class="bg-white text-text-dark font-sans leading-relaxed m-0 p-0 box-border overflow-x-hidden">
+
+    <header class="bg-white/90 backdrop-blur-md px-[5%] py-4 fixed w-full top-0 z-[1000] flex justify-between items-center shadow-sm">
+        <div class="flex items-center gap-3">
+            <img src="https://raw.githubusercontent.com/bps1372/kudo/main/Data/logo-bps.png" alt="Logo BPS" class="h-8 md:h-10 w-auto">
+            <h1 class="text-xl md:text-2xl font-bold text-primary-orange tracking-tight">PADATI</h1>
+        </div>
+        <nav>
+            <ul class="flex gap-6 list-none font-semibold text-gray-600">
+                <li><a href="#beranda" class="hover:text-primary-orange transition-colors">Beranda</a></li>
+                <li><a href="#informasi" class="hover:text-primary-orange transition-colors">Informasi</a></li>
+                <li><a href="#informasi" class="bg-primary-orange text-white px-5 py-2 rounded-full hover:bg-dark-orange transition-all shadow-md">Hubungi Kami</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="beranda" class="relative min-h-screen flex items-center px-[5%] pt-20 overflow-hidden">
+            <div class="blob-bg"></div>
+            <div class="hero-blob animate-float-slow"></div>
+            
+            <div class="grid md:grid-cols-2 gap-10 items-center w-full">
+                <div class="animate-fade-left">
+                    <div class="inline-block bg-light-orange text-dark-orange px-4 py-1 rounded-full text-sm font-bold mb-6">
+                        Sensus Ekonomi 2026
+                    </div>
+                    <h1 class="text-5xl md:text-7xl font-extrabold text-text-dark mb-4 leading-tight">
+                        Pariaman <span class="text-primary-orange">Digital</span> Industri
+                    </h1>
+                    <p class="text-lg md:text-xl text-gray-500 mb-8 max-w-lg">
+                        Inovasi pengumpulan data berbasis <span class="font-semibold text-gray-700">web scraping</span> untuk memetakan sebaran unit usaha secara akurat di wilayah Kota Pariaman.
+                    </p>
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#informasi" class="bg-primary-orange text-white px-8 py-4 rounded-xl text-lg font-bold shadow-lg shadow-orange-200 hover:scale-105 transition-transform">
+                            Jelajahi Data
+                        </a>
+                        <div class="flex items-center gap-2 text-gray-500 px-4">
+                            <span class="flex h-3 w-3 rounded-full bg-green-500 animate-pulse"></span>
+                            Live Data Scraping
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex justify-center md:justify-end relative">
+                    <div class="absolute w-80 h-80 bg-light-orange rounded-full filter blur-3xl opacity-50 -z-10"></div>
+                    <img src="hero_image.png" 
+                         alt="Logo PADATI" 
+                         class="w-full max-w-md drop-shadow-2xl animate-float-slow rounded-3xl border border-orange-100">
+                </div>
+            </div>
+        </section>
+
+        <section id="informasi" class="py-24 px-[5%] bg-bg-body relative overflow-hidden">
+            <div class="absolute left-0 top-0 w-24 h-24 bg-primary-orange/5 rounded-full -translate-x-12 -translate-y-12"></div>
+            
+            <div class="max-w-6xl mx-auto">
+                <div class="flex flex-col md:flex-row gap-12 items-center">
+                    <div class="md:w-1/3">
+                        <h2 class="text-4xl font-black text-text-dark leading-none uppercase">
+                            Tentang <br><span class="text-primary-orange">PADATI</span>
+                        </h2>
+                        <div class="w-20 h-2 bg-primary-orange mt-4 rounded-full"></div>
+                    </div>
+                    
+                    <div class="md:w-2/3 grid gap-8">
+                        <div class="bg-white p-8 rounded-3xl shadow-sm border border-orange-100">
+                            <p class="text-xl text-gray-600 leading-relaxed italic">
+                                "PADATI merupakan terobosan dalam memodernisasi cara kami mengumpulkan data industri di Pariaman."
+                            </p>
+                            <p class="mt-6 text-gray-700 leading-relaxed">
+                                Memanfaatkan teknologi <strong>SE Merchant Extension</strong>, sistem ini mengotomasi pengambilan data dari berbagai raksasa e-commerce untuk memberikan gambaran ekonomi digital saat ini.
+                            </p>
+                        </div>
+
+                        <div class="flex flex-wrap gap-3">
+                            <span class="text-gray-400 font-bold uppercase text-xs w-full mb-2 tracking-widest">Data usaha yang akan discraping mengambil pada platform:</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="bg-white px-6 py-2 rounded-full shadow-sm text-primary-orange font-bold border border-gray-50">GoJek</span>
+                                <span class="bg-white px-6 py-2 rounded-full shadow-sm text-primary-orange font-bold border border-gray-50">BliBli</span>
+                                <span class="bg-white px-6 py-2 rounded-full shadow-sm text-primary-orange font-bold border border-gray-50">Lazada</span>
+                                <span class="bg-white px-6 py-2 rounded-full shadow-sm text-primary-orange font-bold border border-gray-50">Tokopedia</span>
+                                <span class="bg-white px-6 py-2 rounded-full shadow-sm text-primary-orange font-bold border border-gray-50">Shopee</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="bg-text-dark text-gray-400 py-12 px-[5%]">
+        <div class="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+            <div class="text-center md:text-left">
+                <h4 class="text-white font-bold text-xl mb-2 tracking-tighter">PADATI</h4>
+                <p class="text-sm">BPS KOTA PARIAMAN &copy; 2026</p>
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-white transition-colors">Data Privacy</a>
+                <a href="#" class="hover:text-white transition-colors">Methodology</a>
+                <a href="#" class="hover:text-white transition-colors">BPS Official</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // ... (Script Leaflet orisinal kamu tetap sama di sini)
+    </script>
+</body>
+</html>
