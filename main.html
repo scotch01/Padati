@@ -70,16 +70,31 @@
 </head>
 <body class="bg-white text-text-dark font-sans leading-relaxed m-0 p-0 box-border overflow-x-hidden">
 
-    <header class="bg-white/90 backdrop-blur-md px-[5%] py-4 fixed w-full top-0 z-[1000] flex justify-between items-center shadow-sm">
+    <header class="bg-white/90 backdrop-blur-md px-[5%] py-4 fixed w-full top-0 z-[1000] flex flex-wrap justify-between items-center shadow-sm">
         <div class="flex items-center gap-3">
             <img src="https://raw.githubusercontent.com/bps1372/kudo/main/Data/logo-bps.png" alt="Logo BPS" class="h-8 md:h-10 w-auto">
             <h1 class="text-xl md:text-2xl font-bold text-primary-orange tracking-tight">PADATI</h1>
         </div>
-        <nav>
-            <ul class="flex gap-6 list-none font-semibold text-gray-600">
+
+        <button id="menu-btn" class="block md:hidden focus:outline-none">
+            <svg class="w-8 h-8 text-text-dark hover:text-primary-orange transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+        </button>
+
+        <nav class="hidden md:block">
+            <ul class="flex items-center gap-6 list-none font-semibold text-gray-600">
                 <li><a href="#beranda" class="hover:text-primary-orange transition-colors">Beranda</a></li>
                 <li><a href="#informasi" class="hover:text-primary-orange transition-colors">Informasi</a></li>
                 <li><a href="#informasi" class="bg-primary-orange text-white px-5 py-2 rounded-full hover:bg-dark-orange transition-all shadow-md">Hubungi Kami</a></li>
+            </ul>
+        </nav>
+
+        <nav id="mobile-menu" class="hidden w-full md:hidden mt-4 bg-white rounded-2xl shadow-lg border border-orange-100 overflow-hidden">
+            <ul class="flex flex-col list-none font-semibold text-gray-600 text-center">
+                <li class="border-b border-gray-50"><a href="#beranda" class="block py-4 hover:text-primary-orange hover:bg-orange-50 transition-colors mobile-link">Beranda</a></li>
+                <li class="border-b border-gray-50"><a href="#informasi" class="block py-4 hover:text-primary-orange hover:bg-orange-50 transition-colors mobile-link">Informasi</a></li>
+                <li><a href="#informasi" class="block py-4 text-primary-orange hover:bg-orange-50 transition-colors mobile-link">Hubungi Kami</a></li>
             </ul>
         </nav>
     </header>
@@ -89,7 +104,7 @@
             <div class="blob-bg"></div>
             <div class="hero-blob animate-float-slow"></div>
             
-            <div class="grid md:grid-cols-2 gap-10 items-center w-full">
+            <div class="grid md:grid-cols-2 gap-10 items-center w-full mt-10 md:mt-0">
                 <div class="animate-fade-left">
                     <div class="inline-block bg-light-orange text-dark-orange px-4 py-1 rounded-full text-sm font-bold mb-6">
                         Sensus Ekonomi 2026
@@ -156,6 +171,33 @@
                 </div>
             </div>
         </section>
+
+        <section id="data" class="py-24 px-[5%] bg-white relative overflow-hidden border-b-[5px] border-light-orange">
+            <div class="absolute right-0 bottom-0 w-80 h-80 bg-light-orange rounded-full filter blur-3xl opacity-50 translate-x-1/3 translate-y-1/3 z-0"></div>
+
+            <div class="max-w-6xl mx-auto relative z-10">
+                <div class="text-center mb-12 animate-fade-up-1">
+                    <h2 class="text-3xl md:text-4xl font-black text-text-dark uppercase tracking-tight">
+                        Data Hasil <span class="text-primary-orange">Scraping</span>
+                    </h2>
+                    <div class="w-24 h-1.5 bg-primary-orange mx-auto mt-4 rounded-full"></div>
+                    <p class="mt-6 text-gray-600 max-w-2xl mx-auto text-base md:text-lg">
+                        Tabel rekapitulasi data unit usaha yang berhasil dikumpulkan dengan memanfaatkan SE Merchant Extension untuk PADATI.
+                    </p>
+                </div>
+
+                <div class="bg-white p-3 md:p-6 rounded-[2rem] shadow-xl shadow-orange-900/5 border border-orange-100 transition-all hover:shadow-2xl animate-fade-up-2">
+                    <div class="relative w-full h-[60vh] md:h-[70vh] rounded-xl overflow-hidden bg-bg-body border-2 border-orange-300">
+                        <iframe 
+                            src="https://docs.google.com/spreadsheets/d/1EL-YcP3NN4lJS8tMCXbAnENti4DBQ40p/preview" 
+                            class="w-full h-full absolute inset-0 border-none" 
+                            title="Data Spreadsheet PADATI">
+                        </iframe>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
     </main>
 
     <footer class="bg-text-dark text-gray-400 py-12 px-[5%]">
@@ -172,9 +214,29 @@
         </div>
     </footer>
 
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script> -->
     <script>
-        // ... (Script Leaflet orisinal kamu tetap sama di sini)
+        // --- Skrip Leaflet Orisinal Anda ---
+        // (Masukkan kembali skrip map jika diperlukan di sini)
+
+        // --- Skrip Hamburger Menu ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuBtn = document.getElementById('menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+
+            // Toggle menu saat hamburger diklik
+            menuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Tutup menu otomatis saat salah satu link diklik
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+            });
+        });
     </script>
 </body>
 </html>
